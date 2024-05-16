@@ -2,15 +2,20 @@ server:
   port: 8082
 
 spring:
+  datasource:
+    tomcat:
+      max-active: 800
+      max-idle: 800
+      min-idle: 512
   kafka:
     producer:
-      bootstrap-servers: 192.168.9.128:9092
+      bootstrap-servers: 172.23.2.21:9092
     consumer:
-      bootstrap-servers: 192.168.9.128:9092
+      bootstrap-servers: 172.23.2.21:9092
       group-id: consumer-group-1
     client-id: kafka-client-1
 esa:
-  host: 192.168.9.128
+  host: 172.23.2.21
   port: 9200
   scheme: http
   index: test_index

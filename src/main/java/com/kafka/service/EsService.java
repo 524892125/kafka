@@ -22,11 +22,8 @@ public class EsService {
     @Value("${esa.index}")
     private String indexName;
 
-    public void save(String data) {
-        Map<String, Object> jsonMap = new HashMap<>();
-        jsonMap.put("name", "Product1");
-        jsonMap.put("description", data);
-        jsonMap.put("price", 100.0);
+    public void save(Map<String, Object> data) {
+        Map<String, Object> jsonMap = data;
 
         IndexRequest indexRequest = new IndexRequest(indexName)
                 .source(jsonMap);
