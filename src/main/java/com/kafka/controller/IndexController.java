@@ -20,13 +20,9 @@ public class IndexController {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    @Autowired
-    private EsService esService;
-
     @GetMapping("/send")
     public String send(@RequestParam Map<String, Object> param) {
         this.kafkaTemplate.send("test", param.get("input").toString());
-        esService.save();
         return "send" + param.get("input");
     }
 }

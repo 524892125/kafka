@@ -1,30 +1,38 @@
 package com.kafka.config;
 
+import jakarta.annotation.PostConstruct;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.RestClient;
 import org.apache.http.HttpHost;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 
+@Component
 public class ElasticsearchClient {
-    private static final RestHighLevelClient client;
+    private RestHighLevelClient client;
 
-    static {
+    @Value("${esa.host}")
+    private String host;
+
+    @Value("${esa.port}")
+    private int port;
+
+    @Value("${esa.scheme}")
+    private String scheme;
+
+
+    @PostConstruct
+    public void run() {
         client = new RestHighLevelClient(
                 RestClient.builder(
-                        new HttpHost("192.168.9.128", 9200, "http")
+                        new HttpHost(host, port, scheme)
                 )
         );
     }
 
-    public static RestHighLevelClient getClient() {
+    public RestHighLevelClient getClient() {
         return client;
-    }
-
-    public static void closeClient() throws IOException, IOException {
-        if (client != null) {
-            client.close();
-        }
     }
 }
 
