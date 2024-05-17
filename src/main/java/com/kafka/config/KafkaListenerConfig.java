@@ -18,7 +18,6 @@ public class KafkaListenerConfig {
 
     @KafkaListener(topics = "test", groupId = "test")
     public void listen(String message) {
-        System.out.println("receive message: " + message);
         Gson gson = new Gson();
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> formatData = gson.fromJson(message, map.getClass());

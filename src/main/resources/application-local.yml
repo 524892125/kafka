@@ -1,0 +1,11 @@
+server:
+  port: 8082
+
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.9.128:9092
+    consumer:
+      bootstrap-servers: 192.168.9.128:9092
+esa:
+  host: 192.168.9.128
